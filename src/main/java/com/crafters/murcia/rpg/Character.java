@@ -21,15 +21,31 @@ public class Character {
             CharacterDamage.create(0)
         );
     }
-
+    protected static Character create(int health, int level, int damage) {
+        return new Character(
+            CharacterHealth.create(health),
+            CharacterLevel.create(level),
+            CharacterDamage.create(damage)
+        );
+    }
     public int health() {
-        return health.value() - damage.value();
+        int result = health.value() - damage.value();
+        if(result < 0){
+            return 0;
+        }
+        return result;
     }
     public int level() {
         return level.value();
     }
     public boolean alive() {
         return health.alive(damage);
+    }
+    public Character takeDamage(int damage) {
+        return Character.create(
+            this.health.value(), 
+            this.level.value(), 
+            this.damage.value() + damage);
     }
     
 }
