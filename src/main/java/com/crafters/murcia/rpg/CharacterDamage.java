@@ -7,6 +7,9 @@ public class CharacterDamage {
         this.value = value;
     }
     public static CharacterDamage create(int value){
+        if(value < 0){
+            return new CharacterDamage(0);
+        }
         return new CharacterDamage(value);
     }
     public int value(){

@@ -39,4 +39,21 @@ public class CharacterTest {
         assertFalse(character.alive());
     }
     
+    @Test
+    public void the_character_can_be_healed(){
+        Character character = Character.create().takeDamage(100).heal(50);
+        assertEquals(950, character.health());
+    }
+
+    @Test
+    public void dead_characters_cannot_be_healed (){
+        Character character = Character.create().takeDamage(1005).heal(50);
+        assertEquals(0, character.health());
+    }
+
+    @Test
+    public void healing_cannot_raise_health_above_init_health(){
+        Character character = Character.create().takeDamage(100).heal(200);
+        assertEquals(1000, character.health());
+    }
 }

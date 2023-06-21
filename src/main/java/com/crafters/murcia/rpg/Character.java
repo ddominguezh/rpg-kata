@@ -47,5 +47,14 @@ public class Character {
             this.level.value(), 
             this.damage.value() + damage);
     }
+    public Character heal(int health) {
+        if(!this.alive()){
+            return this;
+        }
+        return Character.create(
+            this.health.value(), 
+            this.level.value(), 
+            this.damage.value() - health);
+    }
     
 }
