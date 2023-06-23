@@ -2,17 +2,17 @@ package com.crafters.murcia.rpg;
 
 public class CharacterDamage {
 
-    private int value;
-    protected CharacterDamage(int value){
+    private double value;
+    protected CharacterDamage(double value){
         this.value = value;
     }
-    public static CharacterDamage create(int value){
+    public static CharacterDamage create(double value){
         if(value < 0){
             return new CharacterDamage(0);
         }
         return new CharacterDamage(value);
     }
-    public int value(){
+    public double value(){
         return this.value;
     }
 

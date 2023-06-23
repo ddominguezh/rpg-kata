@@ -2,14 +2,14 @@ package com.crafters.murcia.rpg;
 
 public class CharacterHealth {
 
-    private int value;
-    protected CharacterHealth(int value){
+    private double value;
+    protected CharacterHealth(double value){
         this.value = value;
     }
-    public static CharacterHealth create(int value){
+    public static CharacterHealth create(double value){
         return new CharacterHealth(value);
     }
-    public int value(){
+    public double value(){
         return this.value;
     }
     public boolean alive(CharacterDamage damage) {
