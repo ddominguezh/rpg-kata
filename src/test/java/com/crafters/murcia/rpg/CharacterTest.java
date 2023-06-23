@@ -93,7 +93,7 @@ public class CharacterTest {
 
     @Test
     public void if_the_target_is_5_or_more_levels_below_the_attacker_damage_is_increased_by_50(){
-         Character enemy = Character.create().levelUp(5);
+        Character enemy = Character.create().levelUp(5);
         Character character = Character.create().takeDamage(enemy);
         assertEquals(850, character.health(), 1);
     }

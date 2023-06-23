@@ -8,31 +8,44 @@ public class Character {
     private CharacterHealth health;
     private CharacterLevel level;
     private CharacterDamage damage;
+    private CharacterType type;
+    private CharacterPosition position;
     protected Character(
         CharacterId id,
         CharacterHealth health,
         CharacterLevel level,
-        CharacterDamage damage
+        CharacterDamage damage,
+        CharacterType type,
+        CharacterPosition position
     ){
         this.id = id;
         this.health = health;
         this.level = level;
         this.damage = damage;
+        this.type = type;
+        this.position = position;
     }
     public static Character create() {
+        return Character.create(CharacterTypes.Empty.name());
+    }
+    public static Character create(String type) {
         return new Character(
             CharacterId.create(UUID.randomUUID().toString()),
             CharacterHealth.create(1000),
             CharacterLevel.create(1),
-            CharacterDamage.create(0)
+            CharacterDamage.create(0),
+            CharacterType.create(type),
+            CharacterPosition.create(0, 0)
         );
     }
-    protected static Character create(String id, double health, int level, double damage) {
+    protected static Character create(String id, double health, int level, double damage, String type, int x, int y) {
         return new Character(
             CharacterId.create(id),
             CharacterHealth.create(health),
             CharacterLevel.create(level),
-            CharacterDamage.create(damage)
+            CharacterDamage.create(damage),
+            CharacterType.create(type),
+            CharacterPosition.create(x, y)
         );
     }
     public double health() {
@@ -56,7 +69,11 @@ public class Character {
             this.id.value(),
             this.health.value(), 
             this.level.value(), 
-            this.damage.value() + howMuchDamageDoTheyCauseMe(character));
+            this.damage.value() + howMuchDamageDoTheyCauseMe(character),
+            this.type.value(),
+            this.position.x(),
+            this.position.y()
+        );
     }
     public Character heal(Character character) {
         if(!this.equals(character)){
@@ -69,7 +86,11 @@ public class Character {
             this.id.value(),
             this.health.value(), 
             this.level.value(), 
-            this.damage.value() - 50);
+            this.damage.value() - 50,
+            this.type.value(),
+            this.position.x(),
+            this.position.y()
+        );
     }
 
     @Override
@@ -93,7 +114,11 @@ public class Character {
             this.id.value(),
             this.health.value(), 
             this.level.value() + level, 
-            this.damage.value());
+            this.damage.value(),
+            this.type.value(),
+            this.position.x(),
+            this.position.y()
+        );
     }
     
     public double howMuchDamageDoTheyCauseMe(Character enemy){
