@@ -97,4 +97,18 @@ public class CharacterTest {
         Character character = Character.create().takeDamage(enemy);
         assertEquals(850, character.health(), 1);
     }
+
+    @Test
+    public void melee_fighters_have_a_range_of_2_meters(){
+        Character enemy = Character.create(CharacterTypes.Melee.name()).move(3, 0);
+        Character character = Character.create().takeDamage(enemy);
+        assertEquals(1000, character.health(), 1);
+    }
+
+    @Test
+    public void ranged_fighters_have_a_range_of_20_meters(){
+        Character enemy = Character.create(CharacterTypes.Ranged.name()).move(5, -21);
+        Character character = Character.create().takeDamage(enemy);
+        assertEquals(1000, character.health(), 1);
+    }
 }

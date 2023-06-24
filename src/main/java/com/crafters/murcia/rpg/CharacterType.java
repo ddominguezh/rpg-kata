@@ -16,5 +16,8 @@ public class CharacterType {
     public String value(){
         return this.value.name();
     }
+    public int maxDistance() {
+        return this.value.maxDistance();
+    }
 
 }

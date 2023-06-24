@@ -61,20 +61,28 @@ public class Character {
     public boolean alive() {
         return health.alive(damage);
     }
-    public Character takeDamage(Character character) {
-        if(this.equals(character)){
+    public Character takeDamage(Character enemy) {
+        if(this.equals(enemy)){
+            return this;
+        }
+        if(enemy.outOfRange(this.position)){
             return this;
         }
         return Character.create(
             this.id.value(),
             this.health.value(), 
             this.level.value(), 
-            this.damage.value() + howMuchDamageDoTheyCauseMe(character),
+            this.damage.value() + howMuchDamageDoTheyCauseMe(enemy),
             this.type.value(),
             this.position.x(),
             this.position.y()
         );
     }
+
+    private boolean outOfRange(CharacterPosition position) {
+        return this.position.distance(position) > this.type.maxDistance();
+    }
+
     public Character heal(Character character) {
         if(!this.equals(character)){
             return this;
@@ -133,5 +141,16 @@ public class Character {
 
     public double howMuchDamageDoICause(){
         return 100;
+    }
+    public Character move(int x, int y) {
+        return Character.create(
+            this.id.value(),
+            this.health.value(), 
+            this.level.value(), 
+            this.damage.value(),
+            this.type.value(),
+            this.position.x() + x,
+            this.position.y() + y
+        );
     }
 }
