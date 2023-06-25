@@ -113,17 +113,19 @@ public class CharacterTest {
     }
 
     @Test
-    public void players_belonging_to_the_same_faction_are_considered_allies(){
-
-    }
-
-    @Test
     public void allies_cannot_deal_damage_to_one_another(){
-        
+        Character character = Character.create(CharacterTypes.Melee.name(), CharacterFactionType.ORKS.name());
+        Character allies = Character.create(CharacterTypes.Ranged.name(), CharacterFactionType.NECRONS.name(), CharacterFactionType.ORKS.name());
+        character = character.takeDamage(allies);
+        assertEquals(1000, character.health(), 1);
     }
 
     @Test
     public void allies_can_heal_one_another(){
-
+        Character character = Character.create(CharacterTypes.Melee.name(), CharacterFactionType.ORKS.name());
+        Character enemy = Character.create(CharacterTypes.Melee.name(), CharacterFactionType.IMPERIUM_OF_MAN.name());
+        Character allies = Character.create(CharacterTypes.Ranged.name(), CharacterFactionType.NECRONS.name(), CharacterFactionType.ORKS.name());
+        character = character.takeDamage(enemy).heal(allies);
+        assertEquals(950, character.health(), 1);
     }
 }

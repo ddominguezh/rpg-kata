@@ -2,7 +2,6 @@ package com.crafters.murcia.rpg;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CharacterFactions {
     
@@ -16,7 +15,11 @@ public class CharacterFactions {
         );
     }
     public boolean isAllies(CharacterFactions factions){
-        return this.values.stream().filter(value -> factions.values.contains(value)).findFirst().isPresent();
+        return this.values.stream()
+            .filter(value -> value.isNotEmpty())
+            .filter(value -> factions.values.contains(value))
+            .findFirst()
+            .isPresent();
     }
     public String[] values(){
         return this.values.stream().map(CharacterFaction::value).toArray(String[]::new);

@@ -75,7 +75,7 @@ public class Character {
         return health.alive(damage);
     }
     public Character takeDamage(Character enemy) {
-        if(this.equals(enemy)){
+        if(this.equals(enemy) || this.factions.isAllies(enemy.factions)){
             return this;
         }
         if(enemy.outOfRange(this.position)){
@@ -98,7 +98,7 @@ public class Character {
     }
 
     public Character heal(Character character) {
-        if(!this.equals(character)){
+        if(!this.equals(character) && !this.factions.isAllies(character.factions)){
             return this;
         }
         if(!this.alive()){

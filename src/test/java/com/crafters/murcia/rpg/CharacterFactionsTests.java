@@ -43,4 +43,9 @@ public class CharacterFactionsTests {
             )
         );
     }
+
+    @Test
+    public void empty_factions_are_not_allies(){
+        assertFalse(CharacterFactions.create(CharacterFactionType.EMPTY.name()).isAllies(CharacterFactions.create(CharacterFactionType.EMPTY.name())));
+    }
 }

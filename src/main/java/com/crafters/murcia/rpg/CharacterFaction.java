@@ -13,8 +13,13 @@ public class CharacterFaction {
         }
         return new CharacterFaction(CharacterFactionType.EMPTY);
     }
+
     public String value(){
         return this.value.name();
+    }
+
+    public boolean isNotEmpty() {
+        return !CharacterFactionType.EMPTY.equals(this.value);
     }
 
     @Override
