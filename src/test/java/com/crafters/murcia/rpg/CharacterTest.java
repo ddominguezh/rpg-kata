@@ -111,4 +111,19 @@ public class CharacterTest {
         Character character = Character.create().takeDamage(enemy);
         assertEquals(1000, character.health(), 1);
     }
+
+    @Test
+    public void players_belonging_to_the_same_faction_are_considered_allies(){
+
+    }
+
+    @Test
+    public void allies_cannot_deal_damage_to_one_another(){
+        
+    }
+
+    @Test
+    public void allies_can_heal_one_another(){
+
+    }
 }

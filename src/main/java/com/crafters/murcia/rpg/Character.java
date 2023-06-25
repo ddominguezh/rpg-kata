@@ -10,13 +10,15 @@ public class Character {
     private CharacterDamage damage;
     private CharacterType type;
     private CharacterPosition position;
+    private CharacterFactions factions;
     protected Character(
         CharacterId id,
         CharacterHealth health,
         CharacterLevel level,
         CharacterDamage damage,
         CharacterType type,
-        CharacterPosition position
+        CharacterPosition position,
+        CharacterFactions factions
     ){
         this.id = id;
         this.health = health;
@@ -24,28 +26,39 @@ public class Character {
         this.damage = damage;
         this.type = type;
         this.position = position;
+        this.factions = factions;
     }
     public static Character create() {
-        return Character.create(CharacterTypes.Empty.name());
+        return Character.create(CharacterTypes.Empty.name(), CharacterFactionType.EMPTY.name());
     }
-    public static Character create(String type) {
+    public static Character create(String type, String... factions) {
         return new Character(
             CharacterId.create(UUID.randomUUID().toString()),
             CharacterHealth.create(1000),
             CharacterLevel.create(1),
             CharacterDamage.create(0),
             CharacterType.create(type),
-            CharacterPosition.create(0, 0)
+            CharacterPosition.create(0, 0),
+            CharacterFactions.create(factions)
         );
     }
-    protected static Character create(String id, double health, int level, double damage, String type, int x, int y) {
+    protected static Character create(
+        String id, 
+        double health, 
+        int level, 
+        double damage, 
+        String type, 
+        int x, 
+        int y,
+        String... factions) {
         return new Character(
             CharacterId.create(id),
             CharacterHealth.create(health),
             CharacterLevel.create(level),
             CharacterDamage.create(damage),
             CharacterType.create(type),
-            CharacterPosition.create(x, y)
+            CharacterPosition.create(x, y),
+            CharacterFactions.create(factions)
         );
     }
     public double health() {
@@ -75,7 +88,8 @@ public class Character {
             this.damage.value() + howMuchDamageDoTheyCauseMe(enemy),
             this.type.value(),
             this.position.x(),
-            this.position.y()
+            this.position.y(),
+            this.factions.values()
         );
     }
 
@@ -97,7 +111,8 @@ public class Character {
             this.damage.value() - 50,
             this.type.value(),
             this.position.x(),
-            this.position.y()
+            this.position.y(),
+            this.factions.values()
         );
     }
 
@@ -125,7 +140,8 @@ public class Character {
             this.damage.value(),
             this.type.value(),
             this.position.x(),
-            this.position.y()
+            this.position.y(),
+            this.factions.values()
         );
     }
     
@@ -150,7 +166,8 @@ public class Character {
             this.damage.value(),
             this.type.value(),
             this.position.x() + x,
-            this.position.y() + y
+            this.position.y() + y,
+            this.factions.values()
         );
     }
 }
