@@ -18,6 +18,10 @@ public class CharacterFaction {
         return this.value.name();
     }
 
+    public String name(){
+        return this.value.typeName();
+    }
+
     public boolean isNotEmpty() {
         return !CharacterFactionType.EMPTY.equals(this.value);
     }

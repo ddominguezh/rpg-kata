@@ -2,6 +2,7 @@ package com.crafters.murcia.rpg;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class CharacterFactions {
     
@@ -24,4 +25,19 @@ public class CharacterFactions {
     public String[] values(){
         return this.values.stream().map(CharacterFaction::value).toArray(String[]::new);
     }
+    public CharacterFactions concat(String[] factions) {
+        return new CharacterFactions(
+            Stream.concat(Arrays.stream(this.values()), Arrays.stream(factions)).map(CharacterFaction::create).toList()
+        );
+    }
+     public CharacterFactions remove(String[] factions) {
+        List<String> removeFactions = Arrays.asList(factions);
+        return new CharacterFactions(
+            Arrays.stream(this.values()).filter(value -> !removeFactions.contains(value)).map(CharacterFaction::create).toList()
+        );
+    }
+    public String[] names() {
+        return this.values.stream().map(CharacterFaction::name).toArray(String[]::new);
+    }
+   
 }

@@ -128,4 +128,18 @@ public class CharacterTest {
         character = character.takeDamage(enemy).heal(allies);
         assertEquals(950, character.health(), 1);
     }
+
+    @Test
+    public void add_factions(){
+        Character character = Character.create(CharacterTypes.Melee.name(), CharacterFactionType.ORKS.name());
+        assertEquals("Orks", character.factions());
+        assertEquals("Orks, Imperium of Man, Necrons", character.addFactions(CharacterFactionType.IMPERIUM_OF_MAN.name(), CharacterFactionType.NECRONS.name()).factions());
+    }
+
+    @Test
+    public void remove_factions(){
+        Character character = Character.create(CharacterTypes.Melee.name(), CharacterFactionType.IMPERIUM_OF_MAN.name(), CharacterFactionType.ORKS.name(), CharacterFactionType.NECRONS.name());
+        assertEquals("Imperium of Man, Orks, Necrons", character.factions());
+        assertEquals("Orks", character.removeFactions(CharacterFactionType.IMPERIUM_OF_MAN.name(), CharacterFactionType.NECRONS.name()).factions());
+    }
 }

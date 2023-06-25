@@ -14,7 +14,7 @@ public enum CharacterFactionType {
     CharacterFactionType(String name){
         this.name = name;
     }
-    public String print(){
+    public String typeName(){
         return this.name;
     }
 }

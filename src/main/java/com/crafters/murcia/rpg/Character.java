@@ -1,6 +1,9 @@
 package com.crafters.murcia.rpg;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 public class Character {
 
@@ -170,4 +173,35 @@ public class Character {
             this.factions.values()
         );
     }
+
+    public String factions() {
+        return String.join(", ", this.factions.names());
+    }
+    
+    public Character addFactions(String... factions){
+        return Character.create(
+            this.id.value(),
+            this.health.value(), 
+            this.level.value(), 
+            this.damage.value(),
+            this.type.value(),
+            this.position.x(),
+            this.position.y(),
+            this.factions.concat(factions).values()
+        );
+    }
+
+    public Character removeFactions(String... factions){
+        return Character.create(
+            this.id.value(),
+            this.health.value(), 
+            this.level.value(), 
+            this.damage.value(),
+            this.type.value(),
+            this.position.x(),
+            this.position.y(),
+            this.factions.remove(factions).values()
+        );
+    }
+    
 }
